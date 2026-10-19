@@ -9,7 +9,7 @@
   networking.hostName = "sandbox";
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 6443]; # SSH + Kubernetes API
+    allowedTCPPorts = [22 80 443 6443];
     allowedUDPPorts = [8472]; # Flannel VXLAN overlay
   };
 
