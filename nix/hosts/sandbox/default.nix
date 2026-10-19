@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -11,8 +9,8 @@
   networking.hostName = "sandbox";
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 6443 ]; # SSH + Kubernetes API
-    allowedUDPPorts = [ 8472 ];    # Flannel VXLAN overlay
+    allowedTCPPorts = [22 6443]; # SSH + Kubernetes API
+    allowedUDPPorts = [8472]; # Flannel VXLAN overlay
   };
 
   services.openssh = {
@@ -23,7 +21,7 @@
     };
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   environment.systemPackages = with pkgs; [
     vim
     git
@@ -33,7 +31,7 @@
 
   users.users.devops = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyPutYourMacPublicKeyHere"
     ];

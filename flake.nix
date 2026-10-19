@@ -5,7 +5,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  }: {
     nixosConfigurations = {
       sandbox = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
