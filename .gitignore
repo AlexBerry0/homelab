@@ -1,0 +1,11 @@
+# OS artifacts
+.DS_Store
+
+# Nix build outputs
+result
+result-*
+
+# Cleartext secret backups
+*.dec.yaml
+*.unenc.yaml
+*.bak
