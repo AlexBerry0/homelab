@@ -47,10 +47,10 @@ spec:
             limits:
               memory: 1Gi
               cpu: 1000m
-    volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: mealie-data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mealie-data
 ---
 apiVersion: v1
 kind: Service
