@@ -33,7 +33,7 @@
     isNormalUser = true;
     extraGroups = ["wheel"];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyPutYourMacPublicKeyHere"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPg2RDPI3wzU7thDrxd5B9SeJKFdKWo3xJkPFaLmTeIF aberry5040@gmail.com"
     ];
   };
 

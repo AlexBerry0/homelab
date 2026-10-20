@@ -17,6 +17,12 @@
           ./nix/hosts/sandbox/default.nix
         ];
       };
+      sandbox-worker = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          ./nix/hosts/sandbox-worker/default.nix
+        ];
+      };
     };
   };
 }
