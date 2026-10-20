@@ -43,7 +43,7 @@
     enable = true;
     role = "server";
     extraFlags = toString [
-      "--disable=traefik" # Disabled so ArgoCD/Helm manages Ingress later
+      "--disable=traefik"
       "--flannel-backend=vxlan"
     ];
   };
