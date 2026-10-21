@@ -10,11 +10,18 @@ spec:
         - name: custom-tools
           emptyDir: {}
         - name: age-key
-          secret: { secretName: "helm-secrets-age-key" }
+          secret:
+            secretName: helm-secrets-age-key
       initContainers:
         - name: install-ksops
           image: viaductoss/ksops:v4.5.1
-          command: ["/usr/local/bin/ksops", "install", "/custom-tools"]
+          command:
+            [
+              "/usr/local/bin/ksops",
+              "install",
+              "--with-kustomize",
+              "/custom-tools",
+            ]
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
@@ -23,12 +30,12 @@ spec:
           env:
             - name: SOPS_AGE_KEY_FILE
               value: /keys/keys.txt
-            - name: XDG_CONFIG_HOME
-              value: /.config
-            - name: PATH
-              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/custom-tools
           volumeMounts:
-            - mountPath: /custom-tools
+            - mountPath: /usr/local/bin/kustomize
               name: custom-tools
+              subPath: kustomize
+            - mountPath: /usr/local/bin/ksops
+              name: custom-tools
+              subPath: ksops
             - mountPath: /keys
               name: age-key
