@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+  namespace: argocd
+spec:
+  template:
+    spec:
+      volumes:
+        - name: custom-tools
+          emptyDir: {}
+        - name: age-key
+          secret: { secretName: "helm-secrets-age-key" }
+      initContainers:
+        - name: install-ksops
+          image: viaductoss/ksops:v4.5.1
+          command: ["/usr/local/bin/ksops", "install", "/custom-tools"]
+          volumeMounts:
+            - mountPath: /custom-tools
+              name: custom-tools
+      containers:
+        - name: argocd-repo-server
+          env:
+            - name: SOPS_AGE_KEY_FILE
+              value: /keys/keys.txt
+            - name: XDG_CONFIG_HOME
+              value: /.config
+            - name: PATH
+              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/custom-tools
+          volumeMounts:
+            - mountPath: /custom-tools
+              name: custom-tools
+            - mountPath: /keys
+              name: age-key
