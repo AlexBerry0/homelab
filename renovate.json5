@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "prHourlyLimit": 0,
+
+  "kubernetes": {
+    "managerFilePatterns": [
+      "/^kubernetes/apps/.+\\.ya?ml$/",
+      "/^kubernetes/bootstrap/.+\\.ya?ml$/"
+    ]
+  },
+
+  "argocd": {
+    "managerFilePatterns": [
+      "/^kubernetes/core/.+\\.ya?ml$/"
+    ]
+  },
+
+  "packageRules": [
+    {
+      "description": "Group minor and patch updates for the media suite",
+      "matchPackageNames": [
+        "/sonarr/i",
+        "/radarr/i",
+        "/prowlarr/i",
+        "/bazarr/i",
+        "/lidarr/i",
+        "/readarr/i",
+        "/overseerr/i",
+        "/seerr/i"
+      ],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "TRaSH media suite",
+      "groupSlug": "trash-media-suite"
+    }
+  ]
+}
