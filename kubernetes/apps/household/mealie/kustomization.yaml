@@ -3,6 +3,3 @@ kind: Kustomization
 
 resources:
   - ./mealie.yaml
-
-generators:
-  - ./secret-generator.yaml
