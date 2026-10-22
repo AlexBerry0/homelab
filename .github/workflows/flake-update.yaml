@@ -23,7 +23,7 @@ jobs:
         uses: DeterminateSystems/determinate-nix-action@v3
 
       - name: Update flake inputs
-        uses: DeterminateSystems/update-flake-lock@v24
+        uses: DeterminateSystems/update-flake-lock@v29
         with:
           pr-title: "chore(deps): update Nix flake inputs"
           pr-labels: |
