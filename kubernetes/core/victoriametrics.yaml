@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoriametrics
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: "https://victoriametrics.github.io/helm-charts/"
+    chart: victoria-metrics-single
+    targetRevision: 0.16.2
+    helm:
+      valuesObject:
+        server:
+          persistentVolume:
+            enabled: true
+            storageClassName: local-path
+            size: 5Gi
+          retentionPeriod: 14d
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 50m
+            limits:
+              memory: 256Mi
+              cpu: 500m
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
